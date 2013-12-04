@@ -1,0 +1,6 @@
+{
+	"name": "assets-module",
+	"main": ["main.scss"],
+	"ignore": ["README.md"],
+	"dependencies": {}
+}
