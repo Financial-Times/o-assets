@@ -12,5 +12,9 @@ $o-assets-global-path: '/bower_components' !default;
         $full-path: $module + '/' + $full-path;
     }
 
-    @return $o-assets-global-path + '/' + $full-path;
+    @if ($o-assets-global-path) {
+    	$full-path: $o-assets-global-path + '/' + $full-path;
+    }
+
+    @return $full-path;
 }

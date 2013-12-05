@@ -27,8 +27,8 @@ A recommended pattern is to define a shorthand function for the above in your ow
 ###Product developers
 With your origami components installed using bower in the default `bower_components` directory, and your web page in the root directory of the project your built sass stylesheets should point to the correct paths to reference the assets within each origami component's subdirectory, e.g. `background: url(/bower_components/module-name/img/logo2.png);`. The paths can however be configured to suit your product as follows:
 
-* If your assets are available from a different directory (though still in subdirectories named after the module) simply set `$o-assets-global-path: '/whichever/path/you/need'`, and it will be prepended instead of `/bower_components`;
-* If your product bundles up the modules' assets into a single directory (no subdirectory for each module), for each module set `$o-module-name-assets-path: #{''}` *\[Note: this isn't an advisable pattern as future module versions may contain assets whose names clash with other modules, or bring in subdependencies with paths you haven't overrridden\]*
+* If your assets are available from a different directory (though still in subdirectories named after the module) simply set `$o-assets-global-path: '/whichever/path/you/need'`, and it will be prepended instead of `/bower_components`. To begin all asset paths with `/` set `$o-assets-global-path: ""` and to use paths relative to the stylesheet (indavisable) set `$o-assets-global-path: null` 
+* If your product bundles up the modules' assets into a single directory (no subdirectory for each module), for each module set `$o-module-name-assets-path: #{''}` *\[Note: this isn't an advisable pattern as future module versions may contain assets whose names clash with other modules, or bring in subdependencies with paths you haven't overridden\]*
 * Use cases for `$o-module-name-version` are generally limited to products using the [build service](http://financial-times.github.io/ft-origami/docs/build-service/), and manually modifying this variable is unlikely to be needed.
 
 ##javascript
