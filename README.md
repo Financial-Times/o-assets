@@ -37,13 +37,13 @@ With your origami components installed using bower in the default `bower_compone
 
 ##Rationale
 
-This policy is designed to enable product developers to easily use the build service, which will define `current-version` variables for each module in the bundle, and will set the global prefix to its own hostname.   This will mean that in the case of the example above, assuming version 1.2 of the colors module, the subresource would be requested from:
+This policy is designed to enable product developers to easily use the build service, which will define `current-version` variables for each module in the bundle, and will set the global prefix to its own hostname. This will mean that in the case of, for example, version 1.2 of the colors module, the asset would be requested from:
 
-	http://buildservice.ft.com/files/o-colors/1.2/img/logo.png
+	http://buildservice.ft.com/files/colors/1.2/img/logo.png
 
 This allows the build service to fully resolve the exact version of the right file, and serve it.  Equally, product developers may leave the prefix and version variables unchanged, in which case the default behaviour will request the resources from:
 
-	/bower_components/o-colors/img/logo.png
+	/bower_components/colors/img/logo.png
 
 If the product developer has installed the Origami modules in a `bower_components` directory (which is typical) and that directory is at the root of their web server's public document tree, the default variable values will make the subresources Just Work&trade;.  However, it's usually advisable not to install packages inside your web root, so the product developer is expected to want to redefine `$o-assets-global-path` and implement a route for this within their front controller, mapping it to the location of their bower_components directory in their file tree.
 
