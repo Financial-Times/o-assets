@@ -1,5 +1,5 @@
 {
-	"name": "assets-module",
+	"name": "o-assets",
 	"main": ["main.scss"],
 	"ignore": ["README.md"],
 	"dependencies": {}
