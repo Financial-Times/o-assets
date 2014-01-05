@@ -1,6 +1,6 @@
 {
 	"name": "o-assets",
-	"main": ["main.scss"],
-	"ignore": ["README.md"],
+	"main": ["main.scss", "main.js"],
+	"ignore": ["README.md", ".origamiconfig"],
 	"dependencies": {}
 }

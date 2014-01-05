@@ -1,50 +1,97 @@
-#assets module
+# Origami asset loader
 
-This module provides sass and javascript utilities for reliably building paths to a module's static assets
+This module provides SASS and JavaScript utilities for reliably building paths to a module's static assets, such as CSS background images, fonts and JSON data files. This is needed because the URL path to load these assets will vary markedly depending on how a product developer chooses to integrate the Origami component into their website.
 
-##sass
+## Overview
 
-### Module developers
+For example, if a module called `o-header` contains a stylesheet that loads a logo as a background, and that image exists at `/img/logo.png` in the module's git repository, the path that needs to be output in the CSS could vary wildly:
 
-Within your module you will need to define the following variables *exactly* as follows (replacing `module-name` with the name of your module)
+1. `http://buildservice.ft.com/files/o-header/1.2/img/logo.png` - If the product developer uses the build service to fetch the CSS, it needs to send the request for the logo back through the build service, and also needs to know what version of the module the CSS came from so it can serve the logo image from the same version.
+1. `/bower_components/o-header/logo.png` - If the product developer has installed the Origami modules in a `bower_components` directory (which is typical) and that directory is at the root of their web server's public document tree, the default variable values will make the subresources Just Work&trade;
+1. `/resources/head/logo.png` - If the product developer has a front-controller and can therefore internally map resource request URLs to different paths on the filesystem, and perhaps also wants to rename the module name component to something of their choosing, they might want the path to be something like this.
 
-	$o-module-name-version: null !default;
-	$o-module-name-assets-path: module-name !default;
+When loading from installed modules there is no need for a version number because the subresource file will be part of the same installed package from which the CSS or JavaScript is drawn.
 
-To reference a static asset from within your stylesheet you should use the `oAssetsUse` function as follows
+## Usage (component developers)
+
+### Declaring variables (SASS only)
+
+For modules containing SASS, you need to define some placeholder variables.  At the top of your module (ideally alongside any other variable definitions), define the following variables *exactly* as follows (replacing `{module-name}` with the name of your module)
+
+	$o-{module-name}-version: null !default;
+	$o-{module-name}-assets-path: {module-name} !default;
+
+You are setting defaults of null for the version, which is only needed (and will be set) by the build service, and the module specific path prefix, which will almost always be the name of the module so should always be set to the module name by default.  There is no need to do any configuration for JavaScript assets.
+
+### Resolving paths in SASS
+
+Where you need to resolve a path in **SASS**, use the `oAssetsUse` function:
 
 	background: url(oAssetsUse("img/logo.png", $o-module-name-assets-path, $o-module-name-version));
 
-####Local shorthand
-A recommended pattern is to define a shorthand function for the above in your own module
+It's a good idea to define your own shorthand function for the standard `oAssetsUse` arguments:
 
-    @function oModuleNameAsset ($asset) {
-        @return oAssetsUse($asset, $o-module-name-assets-path, $o-module-name-version)
+    @function o{ModuleName}Asset ($asset) {
+        @return oAssetsUse($asset, $o-{module-name}-assets-path, $o-{module-name}-version)
     }
-	...
+
+This enables you to resolve asset paths more elegantly:
+
 	background: url(oModuleNameAsset("img/logo2.png"));
 
-###Product developers
-With your origami components installed using bower in the default `bower_components` directory, and your `bower_components` directory inside and at the base of the web server document root of your project, your built sass stylesheets should point to the correct paths to reference the assets within each origami component's subdirectory, e.g. `background: url(/bower_components/module-name/img/logo2.png);`. The paths can however be configured to suit your product as follows:
+### Resolving paths in JavaScript
 
-* If your assets are contained in a different directory/use a different URL path prefix (though still in subdirectories named after the module) simply set `$o-assets-global-path: '/whichever/path/you/need'`, and it will be prepended instead of `/bower_components`. To begin all asset paths with `/` set `$o-assets-global-path: ""` and to use paths relative to the stylesheet set `$o-assets-global-path: false` 
-* If your product bundles up the modules' assets into a single directory (no subdirectory for each module), for each module set `$o-module-name-assets-path: #{''}` *\[Note: this isn't an advisable pattern as future module versions may contain assets whose names clash with other modules, or bring in subdependencies with paths you haven't overridden\]*
-* Use cases for `$o-module-name-version` are generally limited to products using the [build service](http://financial-times.github.io/ft-origami/docs/build-service/), and manually modifying this variable is unlikely to be needed.
+In **JavaScript**, use the `resolve` method of the assets module, which takes the path and module name as arguments
 
-##javascript
+	xhr.open("get", require('o-assets').resolve('/data/2013/12/monthdata.csv', 'o-weather'));
 
-*undeveloped*
+As with SASS, you can define a shorthand if you want to avoid repeating your module name:
 
-##Rationale
+	function useAsset(path) {
+		return require('o-assets').resolve(path, 'o-weather');
+	}
 
-This mdule is designed to enable product developers to easily use the build service, which will define `current-version` variables for each module in the bundle, and will set the global prefix to its own hostname. This will mean that in the case of, for example, version 1.2 of the colors module, the asset would be requested from:
+## Usage (product developers)
 
-	http://buildservice.ft.com/files/o-colors/1.2/img/logo.png
+This section is intended for product developers who want to use Origami modules.
 
-This allows the build service to fully resolve the exact version of the right file, and serve it.  Equally, product developers may leave the prefix and version variables unchanged, in which case the default behaviour will request the resources from:
+### If you're using the build service
 
-	/bower_components/o-colors/img/logo.png
+Don't worry, be happy.  It's all taken care of, and your assets should load from the build service.  Marvellous.
 
-If the product developer has installed the Origami modules in a `bower_components` directory (which is typical) and that directory is at the root of their web server's public document tree, the default variable values will make the subresources Just Work&trade;.  However, it's usually advisable not to install packages inside your web root, so the product developer is expected to want to redefine `$o-assets-global-path` and implement a route for this within their front controller, mapping it to the location of their bower_components directory in their file tree.
+If not, we assume you're doing your own build of Origami components.  In that case...
 
-When loading from installed modules there is no need for a version number because the subresource file will be part of the same installed package from which the CSS is drawn.
+### If you don't have URL routing
+
+If your web server is serving files directly from disk with no routing layer, and therefore URL paths map directly to filesystem paths, then Origami assets should load correctly by default, provided that you:
+
+* installed your Origami components using bower in the default `bower_components` directory; and
+* your `bower_components` directory is *inside* and at the base of the public web server document root of your project.
+
+### If you do have URL routing
+
+If you have URL routing and you want to improve on the above (because it's generally inadvisable to put bower_components in a public area of your web server), you can configure the assets module to load assets from a different path.  There are three components that you can configure:
+
+1. Global path prefix: `$o-assets-global-path` variable (in SASS) and `setGlobalPathPrefix` method (in JavaScript).  Default is '/bower_components'.
+1. Module path: `$o-{module-name}-assets-path` variable (in SASS) and `setModulePaths` method (in JavaScript).  Default is the name of the module.
+1. Module version: `$o-{module-name}-version variable (in SASS) and `setModuleVersions` method (in JavaScript).  Default is null.
+
+The path to a given resource is composed by doing the following concatenation:
+
+	{global-prefix} + [ / {module-path} ] + [ / {module-version} ] + / {path-within-repo}
+
+Module version and module path are prefixed with a slash if not empty.  Generally the only use case for the version token is in the build service, so you should not need to set that.  You may want to set the global prefix to something like '/resources' or similar, and then put your bower_components directory outside your webroot, and use a URL router to map HTTP requests to the appropriate assets.
+
+Setting module paths and versions is done at the module level.  In SASS, using appropriately namespaced variables:
+
+	$o-colors-assets-path: 'colours';
+
+In JavaScript, using the `setModulePaths` method, which takes an object mapping module names to paths:
+
+	require('o-assets').setModulePaths({
+	  colors: 'colours'
+	});
+
+To begin all asset paths with `/` set `$o-assets-global-path: ""` and to use paths relative to the stylesheet set `$o-assets-global-path: false`.
+
+If your product combines all modules' assets into a single directory (no subdirectory for each module), then for each module set `$o-{module-name}-assets-path: #{''}`.  This isn't an advisable pattern, because even if there are no clashes between modules immediately, future module versions may contain assets whose names clash, or bring in subdependencies with paths you haven't overridden, which will unnecessarily complicate upgrades.
