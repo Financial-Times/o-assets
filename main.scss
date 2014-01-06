@@ -1,4 +1,4 @@
-$o-assets-global-path: '/bower_components' !default;
+$o-assets-global-path: '/bower_components/' !default;
 
 @function oAssetsUse ($asset, $module: null, $version: null) {
 
@@ -13,7 +13,7 @@ $o-assets-global-path: '/bower_components' !default;
     }
 
     @if ($o-assets-global-path) {
-    	$full-path: $o-assets-global-path + '/' + $full-path;
+    	$full-path: $o-assets-global-path + $full-path;
     }
 
     @return #{$full-path};
