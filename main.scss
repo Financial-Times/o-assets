@@ -4,7 +4,7 @@ $o-assets-global-path: '/bower_components/' !default;
 
     $full-path: $asset;
 
-    @if ($version) {
+    @if ($version and $module) {
         $full-path: $version + '/' + $full-path;
     }
 
