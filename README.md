@@ -88,6 +88,8 @@ If you have URL routing and you want to improve on the above (because it's gener
 1. Module path: `$o-{module-name}-assets-path` variable (in SASS) and `setModulePaths` method (in JavaScript).  Default is the name of the module.
 1. Module version: `$o-{module-name}-version variable (in SASS) and `setModuleVersions` method (in JavaScript).  Default is null.
 
+All the above should be set before including any other modules in your product's sass/js bundles.
+
 The path to a given resource is composed by doing the following concatenation:
 
 	{global-prefix} + [ {module-path} + / ] + [ {module-version} + / ] {path-within-repo}
