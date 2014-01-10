@@ -1,8 +1,8 @@
 {
   "name": "o-assets",
   "main": [
-    "main.scss",
-    "main.js"
+    "main.js" ,
+    "main.scss"
   ],
   "ignore": [
     "README.md"
