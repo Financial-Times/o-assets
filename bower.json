@@ -5,7 +5,6 @@
     "main.js"
   ],
   "ignore": [
-    "README.md",
-    ".origamiconfig"
+    "README.md"
   ]
 }
