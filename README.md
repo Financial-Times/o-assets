@@ -6,7 +6,7 @@ This module provides SASS and JavaScript utilities for reliably building paths t
 
 For example, if a module called `o-header` contains a stylesheet that loads a logo as a background, and that image exists at `/img/logo.png` in the module's git repository, the path that needs to be output in the CSS could vary wildly:
 
-1. `http://buildservice.ft.com/files/o-header/1.2/img/logo.png` - If the product developer uses the build service to fetch the CSS, it needs to send the request for the logo back through the build service, and also needs to know what version of the module the CSS came from so it can serve the logo image from the same version.
+1. `http://buildservice.ft.com/files/o-header@1.2/img/logo.png` - If the product developer uses the build service to fetch the CSS, it needs to send the request for the logo back through the build service, and also needs to know what version of the module the CSS came from so it can serve the logo image from the same version.
 1. `/bower_components/o-header/logo.png` - If the product developer has installed the Origami modules in a `bower_components` directory (which is typical) and that directory is at the root of their web server's public document tree, the default variable values will make the subresources Just Work&trade;
 1. `/resources/head/logo.png` - If the product developer has a front-controller and can therefore internally map resource request URLs to different paths on the filesystem, and perhaps also wants to rename the module name component to something of their choosing, they might want the path to be something like this.
 
@@ -92,7 +92,7 @@ All the above should be set before including any other modules in your product's
 
 The path to a given resource is composed by doing the following concatenation:
 
-	{global-prefix} + [ {module-path} + / ] + [ {module-version} + / ] {path-within-repo}
+	{global-prefix} + [ {module-path}  [ +  @ + {module-version} ] + / ] + {path-within-repo}
 
 Module version and module path are suffixed with a slash if not empty.  Generally the only use case for the version token is in the build service, so you should not need to set that. You may want to set the global prefix to something like '/resources/' or similar, and then put your bower_components directory outside your webroot, and use a URL router to map HTTP requests to the appropriate assets.
 
