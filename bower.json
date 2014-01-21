@@ -1,10 +1,11 @@
 {
   "name": "o-assets",
   "main": [
-    "main.js" ,
+    "main.js",
     "main.scss"
   ],
   "ignore": [
-    "README.md"
+    "README.md",
+    "test/"
   ]
 }
