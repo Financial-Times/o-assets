@@ -39,7 +39,7 @@ Where you need to resolve a path use the `oAssetsUse` function:
 
 	background: url(oAssetsUse("img/logo.png", $o-module-name-assets-path, $o-module-name-version));
 
-It's a good idea to define your own shorthand function for the standard `oAssetsUse` arguments:
+`$o-module-name-assets-path` and `$o-module-name-version` **must** be passed in as parameters (even though they will probably have little to no effect on your local environment). It's a good idea to define your own shorthand function for the standard `oAssetsUse` arguments:
 
     @function o{ModuleName}Asset ($asset) {
         @return oAssetsUse($asset, $o-{module-name}-assets-path, $o-{module-name}-version);
