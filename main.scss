@@ -1,6 +1,6 @@
 $o-assets-global-path: '/bower_components/' !default;
 
-@function oAssetsUse ($asset, $module: null, $version: null) {
+@function oAssetsUse ($asset, $module, $version) {
 
     $full-path: $asset;
 
