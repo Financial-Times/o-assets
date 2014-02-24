@@ -5,7 +5,6 @@
     "main.scss"
   ],
   "ignore": [
-    "README.md",
     "test/"
   ]
 }
