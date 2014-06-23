@@ -24,25 +24,16 @@ Add the following to the top of your SASS stylesheet
 
 	@import "o-assets/main";  
 
-#### Placeholder variables
-
-At the top of your module (ideally alongside any other variable definitions), define the following variables *exactly* as follows (replacing `{module-name}` with the name of your module)
-
-	$o-{module-name}-version: null !default;
-	$o-{module-name}-assets-path: {module-name} !default;
-
-You are setting defaults of `null` for the version, which is only needed (and will be set) by the build service, and the module-specific path prefix, which will almost always be the name of the module so should always be set to the module name by default.  There is no need to do any configuration for JavaScript assets.
-
 #### Resolving paths
 
 Where you need to resolve a path use the `oAssetsUse` function:
 
-	background: url(oAssetsUse("img/logo.png", $o-module-name-assets-path, $o-module-name-version));
+	background: url(oAssetsUse("img/logo.png", o-module-name));
 
-`$o-module-name-assets-path` and `$o-module-name-version` **must** be passed in as parameters (even though they will probably have little to no effect on your local environment). It's a good idea to define your own shorthand function for the standard `oAssetsUse` arguments:
+It's a good idea to define your own shorthand function for the standard `oAssetsUse` arguments:
 
-    @function o{ModuleName}Asset ($asset) {
-        @return oAssetsUse($asset, $o-{module-name}-assets-path, $o-{module-name}-version);
+    @function oModuleNameAsset ($asset) {
+        @return oAssetsUse($asset, o-module-name);
     }
 
 This enables you to resolve asset paths more elegantly:
@@ -82,39 +73,41 @@ If your web server is serving files directly from disk with no routing layer, an
 
 ### If you do have URL routing
 
-If you have URL routing and you want to improve on the above (because it's generally inadvisable to put bower_components in a public area of your web server), you can configure the assets module to load assets from a different path.  There are three components that you can configure:
+If you have URL routing and you want to improve on the above (because it's generally inadvisable to put bower_components in a public area of your web server), you can configure the assets module to load assets from a different path.  There are two components that you can configure:
 
 1. Global path prefix: `$o-assets-global-path` variable (in SASS) and `setGlobalPathPrefix` method (in JavaScript).  Default is '/bower_components/'.
-1. Module path: `$o-{module-name}-assets-path` variable (in SASS) and `setModulePaths` method (in JavaScript).  Default is the name of the module.
-1. Module version: `$o-{module-name}-version variable (in SASS) and `setModuleVersions` method (in JavaScript).  Default is null.
+1. Module path: `oAssetsSetModulePaths` function (in SASS) and `setModulePaths` method (in JavaScript).  Default is the name of the module.
 
 All the above should be set before including any other modules in your product's sass/js bundles.
 
 The path to a given resource is composed by doing the following concatenation:
 
-	{global-prefix} + [ {module-path}  [ +  @ + {module-version} ] + / ] + {path-within-repo}
+	{global-prefix} + [ {module-path} + / ] + {path-within-repo}
 
-Module version and module path are suffixed with a slash if not empty.  Generally the only use case for the version token is in the build service, so you should not need to set that. You may want to set the global prefix to something like '/resources/' or similar, and then put your bower_components directory outside your webroot, and use a URL router to map HTTP requests to the appropriate assets.
+The module path is suffixed with a slash if not empty.  You may want to set the global prefix to something like '/resources/' or similar, and then put your bower_components directory outside your webroot, and use a URL router to map HTTP requests to the appropriate assets.
 
-Setting module paths and versions is done at the module level.  In SASS, using appropriately namespaced variables:
+Setting module paths and versions is done at the module level. In SASS, using the `oAssetsSetModulePaths` method, which takes a map of module names and paths:
 
-	$o-colors-assets-path: 'colors';
+	oAssetsSetModulePaths((
+	  o-colors: assets/colors
+	));
 
 In JavaScript, using the `setModulePaths` method, which takes an object mapping module names to paths:
 
 	require('o-assets').setModulePaths({
-	  colors: 'colors'
+	  'o-colors': 'assets/colors'
 	});
 
 #### Placing assets from multiple modules in a single directory
 
 This isn't an advisable pattern, because even if there are no clashes between modules immediately, future module versions may contain assets whose names clash, or bring in subdependencies with paths you haven't overridden, which will unnecessarily complicate upgrades. However, if your use case justifies doing so then, for each module, in SASS set 
 
-    $o-{module-name}-assets-path: #{''};
+    oAssetsSetModulePaths((
+	  o-modulename: #{''}
+	));
 
 and in JavaScript
 
 	require('o-assets').setModulePaths({
-	  module1: '',
-	  module2: ''
+	  'o-modulename': ''
 	});

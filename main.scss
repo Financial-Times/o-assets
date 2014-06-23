@@ -1,14 +1,30 @@
 $o-assets-global-path: '/bower_components/' !default;
 
-@function oAssetsUse ($asset, $module, $version) {
+$o-assets-paths-map: ();
+
+@function oAssetsUse ($asset, $module, $version: undefined) {
 
     $full-path: $asset;
 
-    @if ($module) {
-        @if ($version) {
-            $full-path: $module + '@' + $version + '/' + $full-path;
+    // latest API doesn't require a third parameter
+    @if ($version == undefined) {
+        
+        @if (map-has-key($o-assets-paths-map, $module)) {
+            $module-path: map-get($o-assets-paths-map, $module)
+            $full-path: $module-path + '/' + $full-path;
         } @else {
-             $full-path: $module + '/' + $full-path;
+            // preserves old behaviour of defaulting to module name
+            $full-path: $module + '/' + $full-path;
+        }
+
+    // for backwards compatibility
+    } @else {
+        @if ($module) {
+            @if ($version) {
+                $full-path: $module + '@' + $version + '/' + $full-path;
+            } @else {
+                 $full-path: $module + '/' + $full-path;
+            }
         }
     }
 
@@ -17,4 +33,8 @@ $o-assets-global-path: '/bower_components/' !default;
     }
 
     @return #{$full-path};
+}
+
+@function oAssetsSetModulePaths ($path-map) {
+    map-merge($o-assets-paths-map, $path-map);
 }
