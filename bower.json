@@ -5,6 +5,8 @@
     "main.scss"
   ],
   "ignore": [
-    "test/"
+    "test/",
+    "package.json",
+    ".travis.yml"
   ]
 }
