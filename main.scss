@@ -35,8 +35,8 @@ $o-assets-paths-map: ();
     $full-path: $asset;
 
     @if (map-has-key($o-assets-paths-map, $module)) {
-        $module-path: map-get($o-assets-paths-map, $module)
-        
+        $module-path: map-get($o-assets-paths-map, $module);
+
         // allows putting assets in single directory shared by all modules
         @if ($module-path and str-length($module-path) > 0 ) {
             $full-path: $module-path + '/' + $full-path;
@@ -54,5 +54,5 @@ $o-assets-paths-map: ();
 }
 
 @function oAssetsSetModulePaths ($path-map) {
-    map-merge($o-assets-paths-map, $path-map);
+    $o-assets-paths-map: map-merge($o-assets-paths-map, $path-map);
 }
