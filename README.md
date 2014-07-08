@@ -18,7 +18,7 @@ Where you need to resolve a path use the `resolve` methods, which take the path 
 
 ### Sass
 
-	background: url(oAssetsResolve("img/logo.png", o-module-name));
+	background: url(oAssetsResolve("img/symbols-sprite.png", o-weather));
 
 ### JavaScript
 
@@ -55,13 +55,13 @@ There are two components that you can configure, which should be set before incl
 ### Sass
 	
 	oAssetsSetModulePaths((
-	  o-colors: assets/colors
+	  o-header: assets/header
 	));
 
 ### JavaScript
 
 	require('o-assets').setModulePaths({
-	  'o-colors': 'assets/colors'
+	  'o-header': 'assets/header'
 	});
 
 
@@ -72,11 +72,11 @@ You may want to set the global prefix to something like '/resources/' or similar
 This isn't an advisable pattern, because even if there are no clashes between modules immediately, future module versions may contain assets whose names clash, or bring in subdependencies with paths you haven't overridden, which will unnecessarily complicate upgrades. However, if your use case justifies doing so then, for each module, in SASS set 
 
     oAssetsSetModulePaths((
-	  o-modulename: null
+	  o-icons: null
 	));
 
 and in JavaScript
 
 	require('o-assets').setModulePaths({
-	  'o-modulename': ''
+	  'o-icons': ''
 	});
