@@ -1,0 +1,14 @@
+{
+  "name": "o-assets",
+  "private": true,
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "scripts": {
+    "test": "browserify test/tests.js -o test/testrunner.js; node test/testrunner.js"
+  },
+  "devDependencies": {
+    "browserify": "3.29.1"
+  }
+}

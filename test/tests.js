@@ -33,7 +33,8 @@ assertEquals(assets.resolve('/img/logo.png', 'module1'), 'foo/module1/img/logo.p
 
 chainedAssets = assets.setModulePaths({
     module1: 'module1modified',
-    module2: '/module2modified/'
+    module2: '/module2modified/',
+    module4: 'module4modified@~1.0.0'
 });
 
 assertEquals(assets, chainedAssets);
@@ -41,25 +42,16 @@ assertEquals(assets, chainedAssets);
 assertEquals(assets.resolve('/img/logo.png', 'module1'), 'foo/module1modified/img/logo.png');
 assertEquals(assets.resolve('/img/logo.png', 'module2'), 'foo/module2modified/img/logo.png');
 assertEquals(assets.resolve('/img/logo.png', 'module3'), 'foo/module3/img/logo.png');
+assertEquals(assets.resolve('/img/logo.png', 'module4'), 'foo/module4modified@~1.0.0/img/logo.png');
 assertEquals(assets.resolve('img/logo.png', 'module1'), 'foo/module1modified/img/logo.png');
 assertEquals(assets.resolve('img/logo.png', 'module2'), 'foo/module2modified/img/logo.png');
 assertEquals(assets.resolve('img/logo.png', 'module3'), 'foo/module3/img/logo.png');
-
-chainedAssets = assets.setModuleVersions({
-    module1: '3.4.2',
-    module3: '~1.0.0'
-});
-
-assertEquals(assets, chainedAssets);
-
-assertEquals(assets.resolve('/img/logo.png', 'module1'), 'foo/module1modified@3.4.2/img/logo.png');
-assertEquals(assets.resolve('/img/logo.png', 'module2'), 'foo/module2modified/img/logo.png');
-assertEquals(assets.resolve('/img/logo.png', 'module3'), 'foo/module3@~1.0.0/img/logo.png');
+assertEquals(assets.resolve('img/logo.png', 'module4'), 'foo/module4modified@~1.0.0/img/logo.png');
 
 assets.setGlobalPathPrefix('/');
-assertEquals(assets.resolve('/img/logo.png', 'module1'), '/module1modified@3.4.2/img/logo.png');
-assertEquals(assets.resolve('/img/logo.png', 'module2'), '/module2modified/img/logo.png');
-assertEquals(assets.resolve('/img/logo.png', 'module3'), '/module3@~1.0.0/img/logo.png');
+
+assertEquals(assets.resolve('/img/logo.png', 'module3'), '/module3/img/logo.png');
+assertEquals(assets.resolve('img/logo.png', 'module4'), '/module4modified@~1.0.0/img/logo.png');
 
 assets.setModulePaths({
     module1: '',
@@ -67,5 +59,5 @@ assets.setModulePaths({
 });
 assertEquals(assets.resolve('/img/logo.png', 'module1'), '/img/logo.png');
 assertEquals(assets.resolve('/img/logo.png', 'module2'), '/img/logo.png');
-assertEquals(assets.resolve('/img/logo.png', 'module3'), '/module3@~1.0.0/img/logo.png');
+assertEquals(assets.resolve('/img/logo.png', 'module4'), '/module4modified@~1.0.0/img/logo.png');
 

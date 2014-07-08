@@ -9,6 +9,7 @@ module.exports = {
         if (typeof newprefix != 'undefined') globalPrefix = newprefix;
         return this;
     },
+    // left in for backwards compatibility but shouldn't be needed hereonin
     setModuleVersions: function (map) {
         for (var i in map) moduleVersions[i] = trim(map[i]);
         return this;
@@ -22,7 +23,12 @@ module.exports = {
         if (typeof modulePaths[modulename] == 'undefined') modulePaths[modulename] = modulename;
 
         if (modulePaths[modulename]) {
-            fullpath = modulePaths[modulename] + (moduleVersions[modulename] ? ('@' +  moduleVersions[modulename]) : '') + '/' + fullpath;
+            fullpath = modulePaths[modulename] +
+
+            // left in for backwards compatibility but shouldn't be needed hereonin
+            (moduleVersions[modulename] ? ('@' +  moduleVersions[modulename]) : '') +
+
+            '/' + fullpath;
         }
         if (globalPrefix) fullpath = globalPrefix + fullpath;
         return fullpath;
