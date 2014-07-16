@@ -6,7 +6,7 @@ $o-assets-paths-map: ();
 // Deprecated - remove in v2
 @function oAssetsUse ($asset, $module, $version) {
 
-    @warn "`oAssetsUse` is deprecated. Use `oAssetsResolve` instead. You should also remove `$o-#{$module}-version` and `$o-#{$module}-assets-path` from your module";
+    @warn "`oAssetsUse` is deprecated. Use `oAssetsResolve` instead. You should also remove `$#{$module}-version` and `$#{$module}-assets-path` from your module";
 
     $full-path: $asset;
 
