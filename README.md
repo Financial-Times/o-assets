@@ -54,7 +54,7 @@ There are two components that you can configure, which should be set before incl
 
 ### Sass
 	
-	oAssetsSetModulePaths((
+	@include oAssetsSetModulePaths((
 	  o-header: assets/header
 	));
 
@@ -69,9 +69,9 @@ You may want to set the global prefix to something like '/resources/' or similar
 
 #### Placing assets from multiple modules in a single directory
 
-This isn't an advisable pattern, because even if there are no clashes between modules immediately, future module versions may contain assets whose names clash, or bring in subdependencies with paths you haven't overridden, which will unnecessarily complicate upgrades. However, if your use case justifies doing so then, for each module, in SASS set 
+This isn't an advisable pattern, because even if there are no clashes between modules immediately, future module versions may contain assets whose names clash, or bring in subdependencies with paths you haven't overridden, which will unnecessarily complicate upgrades. However, if your use case justifies doing so then, for each module, in SASS use
 
-    oAssetsSetModulePaths((
+    @include oAssetsSetModulePaths((
 	  o-icons: null
 	));
 

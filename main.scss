@@ -53,6 +53,11 @@ $o-assets-paths-map: ();
     @return #{$full-path};
 }
 
-@function oAssetsSetModulePaths ($path-map) {
+@mixin oAssetsSetModulePaths ($path-map) {
     $o-assets-paths-map: map-merge($o-assets-paths-map, $path-map);
+}
+
+
+@function oAssetsSetModulePaths ($path-map) {
+    @warn "oAssetsSetModulePaths is a mixin, not a function; use @include oAssetsSetModulePaths($path-map)"
 }
