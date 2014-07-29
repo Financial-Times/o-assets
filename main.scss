@@ -44,10 +44,10 @@ $o-assets-paths-map: () !default;
     } @else {
         // defaults to use module name
         $full-path: $module + '/' + $full-path;
-    }
 
-    @if ($o-assets-global-path) {
-        $full-path: $o-assets-global-path + $full-path;
+        @if ($o-assets-global-path) {
+            $full-path: $o-assets-global-path + $full-path;
+        }
     }
 
     @return #{$full-path};
