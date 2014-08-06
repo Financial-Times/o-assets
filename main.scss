@@ -56,7 +56,7 @@ $o-assets-paths-map: () !default;
 }
 
 @mixin oAssetsSetModulePaths ($path-map) {
-    $o-assets-paths-map: map-merge($o-assets-paths-map, $path-map);
+    $o-assets-paths-map: map-merge($o-assets-paths-map, $path-map) !global;
 }
 
 
