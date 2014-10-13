@@ -9,7 +9,7 @@ This module has been verified in Internet Explorer 7+, modern desktop browsers (
 
 For example, if a module called `o-header` contains a stylesheet that loads a logo as a background, and that image exists at `/img/logo.png` in the module's git repository, the path that needs to be output in the CSS could vary wildly:
 
-1. `http://buildservice.ft.com/files/o-header@1.2/img/logo.png` - If the product developer uses the build service to fetch the CSS, it needs to send the request for the logo back through the build service, and also needs to know what version of the module the CSS came from so it can serve the logo image from the same version.
+1. `http://build.origami.ft.com/files/o-header@1.2/img/logo.png` - If the product developer uses the build service to fetch the CSS, it needs to send the request for the logo back through the build service, and also needs to know what version of the module the CSS came from so it can serve the logo image from the same version.
 1. `/bower_components/o-header/logo.png` - If the product developer has installed the Origami modules in a `bower_components` directory (which is typical) and that directory is at the root of their web server's public document tree, the default variable values will make the subresources Just Work&trade;
 1. `/resources/head/logo.png` - If the product developer has a front-controller and can therefore internally map resource request URLs to different paths on the filesystem, and perhaps also wants to rename the module name component to something of their choosing, they might want the path to be something like this.
 
@@ -46,40 +46,38 @@ If your web server is serving files directly from disk with no routing layer, an
 
 ### If you do have URL routing
 
-If you have URL routing and you want to improve on the above (because it's generally inadvisable to put bower_components in a public area of your web server), you can configure the assets module to load assets from a different path. The path to a given resource is composed by doing the following concatenation:
+If you have URL routing and you want to improve on the above (because it's generally inadvisable to put bower_components in a public area of your web server), you can configure the assets module to load assets from a different path. The path to a given resource is composed by doing the following concatenation by default:
 
-	{global-path-prefix} + [ {module-path} + / ] + {path-within-repo}
+	$o-assets-global-path + {module-name} + / + {path-within-repo}
 
-There are two components that you can configure, which should be set before including any other modules in your product's sass/js bundles.
+By default the global path is `/bower_components/`, which anticipates that you will put your local bower components directory in the public web root of your web server.  However, as well as editing this, you can also set a custom path to any module, in whcih case the path for that module becomes:
+
+	{custom-path} + {path-within-repo}
+
+Note that when you set a custom path for a module, the global path prefix is not used (but is still used for any modules for which you have not set a custom path).
+
+Any custom configuration should be set before including any other modules in your product's sass/js bundles.
 
 1. Global path prefix: `$o-assets-global-path` variable (in SASS) and `setGlobalPathPrefix` method (in JavaScript).  Default is '/bower_components/'.
 1. Module path: This defaults to the name of the module and is set using methods that accept a map of module names and paths:
 
-### Sass
+#### Sass
 	
 	@include oAssetsSetModulePaths((
-	  o-header: assets/header
+	  o-header: /assets/header
 	));
 
-### JavaScript
+#### JavaScript
 
 	require('o-assets').setModulePaths({
-	  'o-header': 'assets/header'
+	  'o-header': '/assets/header'
 	});
 
+### Using the build service for locally installed modules
 
-You may want to set the global prefix to something like '/resources/' or similar, and then put your bower_components directory outside your webroot, and use a URL router to map HTTP requests to the appropriate assets.
-
-#### Placing assets from multiple modules in a single directory
-
-This isn't an advisable pattern, because even if there are no clashes between modules immediately, future module versions may contain assets whose names clash, or bring in subdependencies with paths you haven't overridden, which will unnecessarily complicate upgrades. However, if your use case justifies doing so then, for each module, in SASS use
-
-    @include oAssetsSetModulePaths((
-	  o-icons: null
-	));
-
-and in JavaScript
+If you don't want to make local static assets available publicly, but you want to benefit from including Origami module CSS and JS into your own build, you can use the build service for your local assets.  To do this, you will need to configure paths that *include the version of the module that you installed*, because otherwise the build service might give you assets from a different version of the module to the one you have.  This is a significant gotcha, especially if you have non-shrinkwrapped Origami dependencies.  Make sure your asset resource paths match the version you *actually installed*.
 
 	require('o-assets').setModulePaths({
-	  'o-icons': ''
+	  'o-header': '//build.origami.ft.com/files/o-ft-header@1.2.3',
+	  'o-grid': '//build.origami.ft.com/files/o-grid@2.3.4'
 	});
