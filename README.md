@@ -1,9 +1,9 @@
 # Origami asset loader
 
-This module provides SASS and JavaScript utilities for reliably building paths to a module's static assets, such as CSS background images, fonts and JSON data files. This is needed because the URL path to load these assets will vary markedly depending on how a product developer chooses to integrate the Origami component into their website.
+This module provides Sass and JavaScript utilities for reliably building paths to a module's static assets, such as CSS background images, fonts and JSON data files. This is needed because the URL path to load these assets will vary markedly depending on how a product developer chooses to integrate the Origami component into their website.
 
 ## Browser support
-This module has been verified in Internet Explorer 7+, modern desktop browsers (Chrome, Safari, Firefox, ...) and mobile browsers (Android browser, iOS safari, Chrome mobile).
+This module has been verified in Internet Explorer 7+, modern desktop browsers (Chrome, Safari, Firefox, …) and mobile browsers (Android browser, iOS safari, Chrome mobile).
 
 ## Overview
 
@@ -58,7 +58,7 @@ Note that when you set a custom path for a module, the global path prefix is not
 
 Any custom configuration should be set before including any other modules in your product's sass/js bundles.
 
-1. Global path prefix: `$o-assets-global-path` variable (in SASS) and `setGlobalPathPrefix` method (in JavaScript).  Default is '/bower_components/'.
+1. Global path prefix: `$o-assets-global-path` variable (in Sass) and `setGlobalPathPrefix` method (in JavaScript).  Default is '/bower_components/'.
 1. Module path: This defaults to the name of the module and is set using methods that accept a map of module names and paths:
 
 #### Sass
@@ -78,6 +78,6 @@ Any custom configuration should be set before including any other modules in you
 If you don't want to make local static assets available publicly, but you want to benefit from including Origami module CSS and JS into your own build, you can use the build service for your local assets.  To do this, you will need to configure paths that *include the version of the module that you installed*, because otherwise the build service might give you assets from a different version of the module to the one you have.  This is a significant gotcha, especially if you have non-shrinkwrapped Origami dependencies.  Make sure your asset resource paths match the version you *actually installed*.
 
 	require('o-assets').setModulePaths({
-	  'o-header': '//build.origami.ft.com/files/o-ft-header@1.2.3',
+	  'o-header': '//build.origami.ft.com/files/o-header@1.2.3',
 	  'o-grid': '//build.origami.ft.com/files/o-grid@2.3.4'
 	});
