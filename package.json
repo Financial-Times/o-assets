@@ -1,14 +1,15 @@
 {
-  "name": "o-assets",
   "private": true,
-  "engines": {
-    "node": "0.10.x",
-    "npm": "1.2.x"
-  },
   "scripts": {
-    "test": "browserify test/tests.js -o test/testrunner.js; node test/testrunner.js"
+    "test": "./node_modules/karma/bin/karma start karma.conf.js"
   },
   "devDependencies": {
-    "browserify": "3.29.1"
+    "expect.js": "^0.3.1",
+    "debowerify": "Financial-Times/debowerify",
+    "karma": "^0.12.31",
+    "karma-browserify": "^3.0.0",
+    "karma-mocha": "^0.1.10",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "mocha": "^2.1.0"
   }
 }
