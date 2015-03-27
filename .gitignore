@@ -3,3 +3,4 @@ testrunner.js
 /.sass-cache/
 /build/
 /node_modules/
+/docs/
