@@ -1,6 +1,6 @@
-testrunner.js
 .DS_Store
 /.sass-cache/
 /build/
 /node_modules/
 /docs/
+/bower_components/

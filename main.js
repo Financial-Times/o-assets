@@ -34,20 +34,11 @@ module.exports = {
 	},
 	resolve: function(path, modulename) {
 		var fullpath = trim(path);
+
 		if (typeof modulePaths[modulename] !== 'undefined') {
-			fullpath = modulePaths[modulename] +
-
-			// left in for backwards compatibility but shouldn't be needed hereonin
-			(moduleVersions[modulename] ? ('@' +  moduleVersions[modulename]) : '') +
-
-			'/' + fullpath;
+			fullpath = modulePaths[modulename] + '/' + fullpath;
 		} else {
-			fullpath = modulename +
-
-			// left in for backwards compatibility but shouldn't be needed hereonin
-			(moduleVersions[modulename] ? ('@' +  moduleVersions[modulename]) : '') +
-
-			'/' + fullpath;
+			fullpath = modulename +	'/' + fullpath;
 
 			if (globalPrefix) {
 				fullpath = globalPrefix + fullpath;

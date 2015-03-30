@@ -1,15 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "test": "./node_modules/karma/bin/karma start karma.conf.js"
+    "test": "obt build --sass=test/test.scss --buildCss=test.css && ./node_modules/mocha/bin/mocha test/assets.test.js --compilers js:babel/register"
   },
   "devDependencies": {
-    "expect.js": "^0.3.1",
-    "debowerify": "Financial-Times/debowerify",
-    "karma": "^0.12.31",
-    "karma-browserify": "^4.0.0",
-    "karma-mocha": "^0.1.10",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "mocha": "^2.1.0"
+    "babel": "^4.7.16",
+    "chai": "^2.2.0",
+    "mocha": "^2.2.1"
   }
 }
