@@ -8,5 +8,8 @@
     "test/",
     "package.json",
     ".travis.yml"
-  ]
+  ],
+  "devDependencies": {
+    "bootcamp": "~1.1.7"
+  }
 }
