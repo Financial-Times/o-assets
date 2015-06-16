@@ -81,3 +81,11 @@ If you don't want to make local static assets available publicly, but you want t
 	  'o-header': '//build.origami.ft.com/files/o-header@1.2.3',
 	  'o-grid': '//build.origami.ft.com/files/o-grid@2.3.4'
 	});
+
+----
+
+## License
+
+Copyright (c) 2015 Financial Times Ltd. All rights reserved.
+
+This software is published under the [MIT licence](http://opensource.org/licenses/MIT).
