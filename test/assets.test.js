@@ -1,6 +1,5 @@
 /*jslint node: true */
-/*global describe, it, expect*/
-'use strict';
+/*global describe, it*/
 
 import {readFileSync} from 'fs';
 import expect from 'expect.js';
@@ -8,7 +7,7 @@ import oAssets from '../main';
 
 describe('o-assets', () => {
 	it('should pass CSS tests', () => {
-		var css = readFileSync(require('path').join(process.cwd(), 'build/test.css'), 'utf8');
+		const css = readFileSync(require('path').join(process.cwd(), 'build/test.css'), 'utf8');
 		expect(css).to.contain('Failed: 0');
 	});
 
@@ -18,7 +17,7 @@ describe('o-assets', () => {
 	});
 
 	it('#setGlobalPathPrefix', () => {
-		var chainedoAssets = oAssets.setGlobalPathPrefix();
+		const chainedoAssets = oAssets.setGlobalPathPrefix();
 		expect(chainedoAssets).to.be(oAssets);
 		expect(oAssets.resolve('/img/logo.png', 'module1')).to.be('/bower_components/module1/img/logo.png');
 
@@ -27,7 +26,7 @@ describe('o-assets', () => {
 	});
 
 	it('#setModulePaths', () => {
-		var chainedoAssets = oAssets.setModulePaths({
+		const chainedoAssets = oAssets.setModulePaths({
 			module1: 'module1modified',
 			module2: '/module2modified/',
 			module4: 'module4modified@~1.0.0'
