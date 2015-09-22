@@ -1,4 +1,4 @@
-/*jslint node: true */
+/*eslint-env node*/
 /*global describe, it*/
 
 import {readFileSync} from 'fs';
