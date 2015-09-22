@@ -7,7 +7,7 @@ $bc-setting-warnings: false;
 @include runner-start;
 
 @include oAssetsSetModulePaths((
-	module2: /assets/module2
+	'module2': '/assets/module2'
 ));
 
 @include describe("oAssets") {

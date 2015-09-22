@@ -1,8 +1,6 @@
-'use strict';
-
-var globalPrefix = '/bower_components/';
-var moduleVersions = {};
-var modulePaths = {};
+let globalPrefix = '/bower_components/';
+const moduleVersions = {};
+const modulePaths = {};
 
 function trim(s) {
 	return s.replace(/^\/+/, '').replace(/\/+$/, '');
@@ -17,7 +15,7 @@ module.exports = {
 	},
 	// left in for backwards compatibility but shouldn't be needed hereonin
 	setModuleVersions: function(map) {
-		for (var i in map) {
+		for (const i in map) {
 			if (i) {
 				moduleVersions[i] = trim(map[i]);
 			}
@@ -25,7 +23,7 @@ module.exports = {
 		return this;
 	},
 	setModulePaths: function(map) {
-		for (var i in map) {
+		for (const i in map) {
 			if (i) {
 				modulePaths[i] = trim(map[i]);
 			}
@@ -33,7 +31,7 @@ module.exports = {
 		return this;
 	},
 	resolve: function(path, modulename) {
-		var fullpath = trim(path);
+		let fullpath = trim(path);
 
 		if (typeof modulePaths[modulename] !== 'undefined') {
 			fullpath = modulePaths[modulename] + '/' + fullpath;
