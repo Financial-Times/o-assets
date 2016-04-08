@@ -1,4 +1,4 @@
-# Origami asset loader
+# Origami asset loader [![Build Status](https://circleci.com/gh/Financial-Times/o-assets.png?style=shield&circle-token=fa399be931a86c55510a392198e48bbfeb3bab42)](https://circleci.com/gh/Financial-Times/o-assets)
 
 This module provides Sass and JavaScript utilities for reliably building paths to a module's static assets, such as CSS background images, fonts and JSON data files. This is needed because the URL path to load these assets will vary markedly depending on how a product developer chooses to integrate the Origami component into their website.
 
