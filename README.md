@@ -9,7 +9,7 @@ This module has been verified in Internet Explorer 7+, modern desktop browsers (
 
 For example, if a module called `o-header` contains a stylesheet that loads a logo as a background, and that image exists at `/img/logo.png` in the module's git repository, the path that needs to be output in the CSS could vary wildly:
 
-1. `http://build.origami.ft.com/v2/files/o-header@1.2/img/logo.png` - If the product developer uses the build service to fetch the CSS, it needs to send the request for the logo back through the build service, and also needs to know what version of the module the CSS came from so it can serve the logo image from the same version.
+1. `https://origami-build.ft.com/v2/files/o-header@1.2/img/logo.png` - If the product developer uses the build service to fetch the CSS, it needs to send the request for the logo back through the build service, and also needs to know what version of the module the CSS came from so it can serve the logo image from the same version.
 1. `/bower_components/o-header/logo.png` - If the product developer has installed the Origami modules in a `bower_components` directory (which is typical) and that directory is at the root of their web server's public document tree, the default variable values will make the subresources Just Work&trade;
 1. `/resources/head/logo.png` - If the product developer has a front-controller and can therefore internally map resource request URLs to different paths on the filesystem, and perhaps also wants to rename the module name component to something of their choosing, they might want the path to be something like this.
 
@@ -78,8 +78,8 @@ Any custom configuration should be set before including any other modules in you
 If you don't want to make local static assets available publicly, but you want to benefit from including Origami module CSS and JS into your own build, you can use the build service for your local assets.  To do this, you will need to configure paths that *include the version of the module that you installed*, because otherwise the build service might give you assets from a different version of the module to the one you have.  This is a significant gotcha, especially if you have non-shrinkwrapped Origami dependencies.  Make sure your asset resource paths match the version you *actually installed*.
 
 	require('o-assets').setModulePaths({
-	  'o-header': '//build.origami.ft.com/v2/files/o-header@1.2.3',
-	  'o-grid': '//build.origami.ft.com/v2/files/o-grid@2.3.4'
+	  'o-header': '//origami-build.ft.com/v2/files/o-header@1.2.3',
+	  'o-grid': '//origami-build.ft.com/v2/files/o-grid@2.3.4'
 	});
 
 ----
