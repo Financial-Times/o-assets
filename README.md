@@ -12,7 +12,7 @@ This module provides Sass and JavaScript utilities for reliably building paths t
 - [Licence](#licence)
 
 
-# Overview
+## Overview
 
 If a module called `o-header` contains a stylesheet that loads a logo as a background, and that image exists at `/img/logo.png` in the module's git repository, the path that needs to be output in the CSS could vary wildly:
 
@@ -22,34 +22,34 @@ If a module called `o-header` contains a stylesheet that loads a logo as a backg
 
 When loading from installed modules there is no need for a version number because the subresource file will be part of the same installed package from which the CSS or JavaScript is drawn.
 
-# Usage
+## Usage
 
 Where you need to resolve a path use the `resolve` methods, which take the path relative to the module root directory and module name as arguments:
 
-## Sass
+### Sass
 
 ```sass
 background: url(oAssetsResolve("img/symbols-sprite.png", o-weather));
 ```
 
-## JavaScript
+### JavaScript
 
 ```js
 xhr.open("get", require('o-assets').resolve('data/2013/12/monthdata.csv', 'o-weather'));
 ```
 
-## URL routing
+### URL routing
 
 'URL routing' is used as a generic term for any method used to point a url to a resource, including copying the resource to the location specified by the url.
 
-### If you don't have URL routing
+#### If you don't have URL routing
 
 If your web server is serving files directly from disk with no routing layer, and therefore URL paths map directly to filesystem paths, then Origami assets should load correctly by default, provided that you:
 
 * installed your Origami components using bower in the default `bower_components` directory; and
 * your `bower_components` directory is *inside* and at the base of the public web server document root of your project.
 
-### If you do have URL routing
+#### If you do have URL routing
 
 If you have URL routing and you want to improve on the above (because it's generally inadvisable to put bower_components in a public area of your web server), you can configure the assets module to load assets from a different path. The path to a given resource is composed by doing the following concatenation by default:
 
@@ -70,7 +70,7 @@ Any custom configuration should be set before including any other modules in you
 1. Global path prefix: `$o-assets-global-path` variable (in Sass) and `setGlobalPathPrefix` method (in JavaScript).  Default is '/bower_components/'.
 1. Module path: This defaults to the name of the module and is set using methods that accept a map of module names and paths:
 
-#### Sass
+##### Sass
 
 ```sass
 @include oAssetsSetModulePaths((
@@ -78,7 +78,7 @@ Any custom configuration should be set before including any other modules in you
 ));
 ```
 
-#### JavaScript
+##### JavaScript
 
 ```js
 require('o-assets').setModulePaths({
@@ -86,7 +86,7 @@ require('o-assets').setModulePaths({
 });
 ```
 
-## Using with the build service
+### Using with the build service
 
 If you don't want to make local static assets available publicly, but you want to benefit from including Origami module CSS and JS into your own build, you can use the build service for your local assets.  To do this, you will need to configure paths that *include the version of the module that you installed*, because otherwise the build service might give you assets from a different version of the module to the one you have.  This is a significant gotcha, especially if you have non-shrinkwrapped Origami dependencies.  Make sure your asset resource paths match the version you *actually installed*.
 
@@ -99,12 +99,12 @@ require('o-assets').setModulePaths({
 
 ---
 
-## Contact
+### Contact
 
 If you have any questions or comments about this component, or need help using it, please either [raise an issue](https://github.com/Financial-Times/o-assets/issues), visit [#ft-origami](https://financialtimes.slack.com/messages/ft-origami/) or email [Origami Support](mailto:origami-support@ft.com).
 
 ----
 
-## Licence
+### Licence
 
 This software is published by the Financial Times under the [MIT licence](http://opensource.org/licenses/MIT).
