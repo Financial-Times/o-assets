@@ -1,34 +1,26 @@
+@import 'true';
 @import '../main';
-
-@import 'bootcamp/dist/bootcamp';
-$bc-setting-verbose:  false;
-$bc-setting-warnings: false;
-
-@include runner-start;
 
 @include oAssetsSetModulePaths((
 	'module2': '/assets/module2'
 ));
 
-@include describe("oAssets") {
-	@include it("should resolve path to unknown modules assets without a slash at the beginning") {
-		@include should(
-			expect(oAssetsResolve('img/logo.png', 'module1')),
-			to(equal('/bower_components/module1/img/logo.png'))
-		);
-	}
-	@include it("should resolve path to unknown modules assets with a slash at the beginning") {
-		@include should(
-			expect(oAssetsResolve('/img/logo.png', 'module1')),
-			to(equal('/bower_components/module1/img/logo.png'))
-		);
-	}
-	@include it("should resolve path to known modules assets") {
-		@include should(
-			expect(oAssetsResolve('img/logo.png', 'module2')),
-			to(equal('/assets/module2/img/logo.png'))
-		);
-	}
-}
+@include describe('oAssets') {
+	@include it('should resolve path to unknown modules assets without a slash at the beginning') {
+		@include assert-equal(
+			oAssetsResolve('/img/logo.png', 'module1'),
+			('/bower_components/module1/img/logo.png'));
+	};
 
-@include runner-end;
+	@include it("should resolve path to unknown modules assets with a slash at the beginning") {
+		@include assert-equal(
+			oAssetsResolve('/img/logo.png', 'module1'),
+			('/bower_components/module1/img/logo.png'));
+	};
+
+	@include it("should resolve path to known modules assets") {
+		@include assert-equal(
+			oAssetsResolve('img/logo.png', 'module2'),
+			('/assets/module2/img/logo.png'));
+	};
+};
