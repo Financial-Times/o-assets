@@ -1,6 +1,5 @@
 /* eslint-env mocha */
 
-const readFileSync = require('fs').readFileSync;
 const proclaim = require('proclaim');
 const oAssets = require('../main');
 
