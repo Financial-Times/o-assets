@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "test-sass": "obt build --sass=test-sass/test.scss --buildCss=test.css && mocha test-sass/assets.test.js"
+    "test": "mocha test-sass/"
   },
   "devDependencies": {
     "mocha": "^2.2.1",

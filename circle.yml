@@ -11,5 +11,6 @@ dependencies:
 test:
   override:
     - obt demo --demo-filter pa11y --suppress-errors
+    - npm test
     - obt verify
     - obt test
