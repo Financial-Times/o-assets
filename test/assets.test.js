@@ -1,15 +1,9 @@
 /* eslint-env mocha */
 
-const readFileSync = require('fs').readFileSync;
 const proclaim = require('proclaim');
 const oAssets = require('../main');
 
 describe('o-assets', () => {
-	it('should pass CSS tests', () => {
-		const css = readFileSync(require('path').join(process.cwd(), 'build/test.css'), 'utf8');
-		proclaim.include(css, 'Failed: 0');
-	});
-
 	it('#resolve', () => {
 		proclaim.deepEqual(oAssets.resolve('/img/logo.png', 'module1'), '/bower_components/module1/img/logo.png');
 		proclaim.deepEqual(oAssets.resolve('img/logo.png', 'module1'), '/bower_components/module1/img/logo.png');

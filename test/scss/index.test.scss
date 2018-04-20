@@ -1,0 +1,26 @@
+@import 'true';
+@import '../../main';
+
+@include oAssetsSetModulePaths((
+	'module2': '/assets/module2'
+));
+
+@include describe('oAssets') {
+	@include it('should resolve path to unknown modules assets without a slash at the beginning') {
+		@include assert-equal(
+			oAssetsResolve('/img/logo.png', 'module1'),
+			('/bower_components/module1/img/logo.png'));
+	};
+
+	@include it("should resolve path to unknown modules assets with a slash at the beginning") {
+		@include assert-equal(
+			oAssetsResolve('/img/logo.png', 'module1'),
+			('/bower_components/module1/img/logo.png'));
+	};
+
+	@include it("should resolve path to known modules assets") {
+		@include assert-equal(
+			oAssetsResolve('img/logo.png', 'module2'),
+			('/assets/module2/img/logo.png'));
+	};
+};
