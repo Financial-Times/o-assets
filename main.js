@@ -6,7 +6,7 @@ function trim(s) {
 	return s.replace(/^\/+/, '').replace(/\/+$/, '');
 }
 
-module.exports = {
+export default {
 	setGlobalPathPrefix: function(newprefix) {
 		if (typeof newprefix !== 'undefined') {
 			globalPrefix = newprefix;
