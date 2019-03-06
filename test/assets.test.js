@@ -1,7 +1,8 @@
 /* eslint-env mocha */
 
-const proclaim = require('proclaim');
-const oAssets = require('../main');
+import proclaim from 'proclaim';
+
+import oAssets from '../main';
 
 describe('o-assets', () => {
 	it('#resolve', () => {
