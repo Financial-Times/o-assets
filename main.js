@@ -6,7 +6,7 @@ function trim(s) {
 	return s.replace(/^\/+/, '').replace(/\/+$/, '');
 }
 
-const oAssets = {
+module.exports = {
 	setGlobalPathPrefix: function(newprefix) {
 		if (typeof newprefix !== 'undefined') {
 			globalPrefix = newprefix;
@@ -46,6 +46,3 @@ const oAssets = {
 		return fullpath;
 	}
 };
-
-export default oAssets;
-export { oAssets };
