@@ -1,6 +1,6 @@
 /* eslint-env mocha */
+/* global proclaim */
 
-const proclaim = require('proclaim');
 const oAssets = require('../main');
 
 describe('o-assets', () => {
