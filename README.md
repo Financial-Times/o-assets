@@ -1,5 +1,4 @@
-# Origami asset loader [![NPM version](https://img.shields.io/npm/v/@financial-times/health-check.svg)](https://www.npmjs.com/package/@financial-times/health-check) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](#licence)
-
+# o-assets [![NPM version](https://img.shields.io/npm/v/@financial-times/health-check.svg)](https://www.npmjs.com/package/@financial-times/health-check) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](#licence)
 
 This component provides Sass and JavaScript utilities for reliably building paths to a component's static assets, such as CSS background images, fonts and JSON data files. This is needed because the URL path to load these assets will vary depending on how a product developer chooses to integrate the Origami component into their website.
 
@@ -32,8 +31,8 @@ background: url(oAssetsResolve("img/symbols-sprite.png", o-weather));
 ## JavaScript
 
 ```js
-import { resolve } from 'o-assets';
-xhr.open("get", resolve('data/2013/12/monthdata.csv', 'o-weather'));
+import {resolve} from "o-assets"
+xhr.open("get", resolve("data/2013/12/monthdata.csv", "o-weather"))
 ```
 
 ## URL routing
@@ -44,8 +43,8 @@ xhr.open("get", resolve('data/2013/12/monthdata.csv', 'o-weather'));
 
 If your web server is serving files directly from disk with no routing layer, and therefore URL paths map directly to filesystem paths, then Origami assets should load correctly by default, provided that you:
 
-* installed your Origami components using bower in the default `bower_components` directory; and
-* your `bower_components` directory is *inside* and at the base of the public web server document root of your project.
+- installed your Origami components using bower in the default `bower_components` directory; and
+- your `bower_components` directory is _inside_ and at the base of the public web server document root of your project.
 
 ### If you do have URL routing
 
@@ -55,7 +54,7 @@ If you have URL routing and you want to improve on the above (because it's gener
 $o-assets-global-path + {component-name} + / + {path-within-repo}
 ```
 
-By default the global path is `/bower_components/`, which anticipates that you will put your local bower components directory in the public web root of your web server.  However, as well as editing this, you can also set a custom path to any component, in whcih case the path for that component becomes:
+By default the global path is `/bower_components/`, which anticipates that you will put your local bower components directory in the public web root of your web server. However, as well as editing this, you can also set a custom path to any component, in whcih case the path for that component becomes:
 
 ```scss
 {custom-path} + {path-within-repo}
@@ -65,36 +64,38 @@ Note that when you set a custom path for a component, the global path prefix is 
 
 Any custom configuration should be set before including any other components in your product's sass/js bundles.
 
-1. Global path prefix: `$o-assets-global-path` variable (in Sass) and `setGlobalPathPrefix` method (in JavaScript).  Default is '/bower_components/'.
+1. Global path prefix: `$o-assets-global-path` variable (in Sass) and `setGlobalPathPrefix` method (in JavaScript). Default is '/bower_components/'.
 1. component path: This defaults to the name of the component and is set using methods that accept a map of component names and paths:
 
 #### Sass
 
 ```scss
-@include oAssetsSetcomponentPaths((
-	'o-example': '/assets/example'
-));
+@include oAssetsSetcomponentPaths(
+	(
+		"o-example": "/assets/example",
+	)
+);
 ```
 
 #### JavaScript
 
 ```js
-import { setcomponentPaths } from 'o-assets';
+import {setcomponentPaths} from "o-assets"
 setcomponentPaths({
-	'o-example': '/assets/example'
-});
+	"o-example": "/assets/example",
+})
 ```
 
 ### Using with the build service
 
-If you don't want to make local static assets available publicly, but you want to benefit from including Origami component CSS and JS into your own build, you can use the build service for your local assets.  To do this, you will need to configure paths that *include the version of the component that you installed*, because otherwise the build service might give you assets from a different version of the component to the one you have.  This is a significant gotcha, especially if you have non-shrinkwrapped Origami dependencies.  Make sure your asset resource paths match the version you *actually installed*.
+If you don't want to make local static assets available publicly, but you want to benefit from including Origami component CSS and JS into your own build, you can use the build service for your local assets. To do this, you will need to configure paths that _include the version of the component that you installed_, because otherwise the build service might give you assets from a different version of the component to the one you have. This is a significant gotcha, especially if you have non-shrinkwrapped Origami dependencies. Make sure your asset resource paths match the version you _actually installed_.
 
 ```js
-import { setcomponentPaths } from 'o-assets';
+import {setcomponentPaths} from "o-assets"
 setcomponentPaths({
-	'o-example': '//origami-build.ft.com/v2/files/o-example@1.2.3',
-	'o-grid': '//origami-build.ft.com/v2/files/o-grid@2.3.4'
-});
+	"o-example": "//origami-build.ft.com/v2/files/o-example@1.2.3",
+	"o-grid": "//origami-build.ft.com/v2/files/o-grid@2.3.4",
+})
 ```
 
 ---
@@ -103,7 +104,7 @@ setcomponentPaths({
 
 If you have any questions or comments about this component, or need help using it, please either [raise an issue](https://github.com/Financial-Times/o-assets/issues), visit [#origami-support](https://financialtimes.slack.com/messages/origami-support/) or email [Origami Support](mailto:origami-support@ft.com).
 
-----
+---
 
 ## Licence
 
