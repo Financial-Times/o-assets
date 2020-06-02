@@ -3,10 +3,10 @@
 This component provides Sass and JavaScript utilities for reliably building paths to a component's static assets, such as CSS background images, fonts and JSON data files. This is needed because the URL path to load these assets will vary depending on how a product developer chooses to integrate the Origami component into their website.
 
 - [Overview](#overview)
-- [JavaScript](#javascript)
 - [Sass](#sass)
+- [JavaScript](#javascript)
 - [URL routing](#url-routing)
-- [Using with the build service](#using-with-the-build-service)
+	- [Using with the build service](#using-with-the-build-service)
 - [Contact](#contact)
 - [Licence](#licence)
 
