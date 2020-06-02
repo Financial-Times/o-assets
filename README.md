@@ -70,11 +70,9 @@ Any custom configuration should be set before including any other components in 
 #### Sass
 
 ```scss
-@include oAssetsSetModulePaths(
-	(
-		'o-example': '/assets/example'
-	)
-);
+@include oAssetsSetModulePaths((
+	'o-example': '/assets/example'
+));
 ```
 
 #### JavaScript
