@@ -1,4 +1,4 @@
-# o-assets [![NPM version](https://img.shields.io/npm/v/@financial-times/health-check.svg)](https://www.npmjs.com/package/@financial-times/health-check) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](#licence)
+# o-assets [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](#licence)
 
 This component provides Sass and JavaScript utilities for reliably building paths to a component's static assets, such as CSS background images, fonts and JSON data files. This is needed because the URL path to load these assets will vary depending on how a product developer chooses to integrate the Origami component into their website.
 
