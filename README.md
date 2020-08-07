@@ -3,6 +3,7 @@
 This component provides Sass and JavaScript utilities for reliably building paths to a component's static assets, such as CSS background images, fonts and JSON data files. This is needed because the URL path to load these assets will vary depending on how a product developer chooses to integrate the Origami component into their website.
 
 - [Overview](#overview)
+- [Usage](#usage)
 - [Sass](#sass)
 - [JavaScript](#javascript)
 - [URL routing](#url-routing)
@@ -21,6 +22,10 @@ If a component called `o-example` contains a stylesheet that loads a logo as a b
 When loading from installed components there is no need for a version number because the subresource file will be part of the same installed package from which the CSS or JavaScript is drawn.
 
 Where you need to resolve a path use the `resolve` methods, which take the path relative to the component root directory and component name as arguments:
+
+## Usage
+
+Check out [how to include Origami components in your project](https://origami.ft.com/docs/components/#including-origami-components-in-your-project) to get started with `o-assets`.
 
 ## Sass
 
