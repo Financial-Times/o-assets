@@ -7,6 +7,7 @@ This component provides Sass and JavaScript utilities for reliably building path
 - [Sass](#sass)
 - [JavaScript](#javascript)
 - [URL routing](#url-routing)
+	- [If you don't have URL routing](#if-you-don't-have-url-routing)
 	- [Using with the build service](#using-with-the-build-service)
 - [Contact](#contact)
 - [Licence](#licence)
