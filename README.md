@@ -38,7 +38,7 @@ background: url(oAssetsResolve("img/symbols-sprite.png", o-weather));
 ## JavaScript
 
 ```js
-import {resolve} from 'o-assets'
+import {resolve} from '@financial-times/o-assets'
 xhr.open('get', resolve('data/2013/12/monthdata.csv', 'o-weather'))
 ```
 
@@ -85,7 +85,7 @@ Any custom configuration should be set before including any other components in 
 #### JavaScript
 
 ```js
-import { setModulePaths } from 'o-assets';
+import { setModulePaths } from '@financial-times/o-assets';
 setModulePaths({
 	'o-example': '/assets/example'
 });
@@ -96,7 +96,7 @@ setModulePaths({
 If you don't want to make local static assets available publicly, but you want to benefit from including Origami component CSS and JS into your own build, you can use the build service for your local assets. To do this, you will need to configure paths that _include the version of the component that you installed_, because otherwise the build service might give you assets from a different version of the component to the one you have. This is a significant gotcha, especially if you have non-shrinkwrapped Origami dependencies. Make sure your asset resource paths match the version you _actually installed_.
 
 ```js
-import {setModulePaths} from 'o-assets'
+import {setModulePaths} from '@financial-times/o-assets'
 setModulePaths({
 	'o-example': '//origami-build.ft.com/v2/files/o-example@1.2.3',
 	'o-grid': '//origami-build.ft.com/v2/files/o-grid@2.3.4',
