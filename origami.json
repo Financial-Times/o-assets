@@ -2,7 +2,7 @@
 	"description": "Sass and JavaScript utilities for reliably building paths to a component's static assets, such as CSS background images, fonts and JSON data files.",
 	"origamiType": "module",
 	"origamiCategory": "utilities",
-	"origamiVersion": 1,
+	"origamiVersion": 2,
 	"keywords": ["resolve", "uri", "routing", "build service", "bower"],
 	"support": "https://github.com/Financial-Times/o-assets/issues",
 	"supportContact": {
