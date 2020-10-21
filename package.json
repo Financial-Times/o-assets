@@ -1,5 +1,5 @@
 {
-    "name": "o-assets",
+    "name": "@financial-times/o-assets",
     "main": "main.js",
     "devDependencies": {
         "eslint": "^7.8.1",
