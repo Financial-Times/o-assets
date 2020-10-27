@@ -1,24 +1,35 @@
 {
-    "name": "@financial-times/o-assets",
-    "version": "100.0.0-8",
-    "license": "MIT",
-    "type": "module",
-    "exports": {
-        ".": {
-            "browser": "./main.js"
-        }
-    },
-    "browser": "./main.js",
-    "types": "types",
-    "devDependencies": {
-        "eslint": "^7.8.1",
-        "eslint-config-origami-component": "^2.1.0",
-        "origami-ci-tools": "^2.0.2",
-        "remark-preset-lint-origami-component": "^1.2.0",
-        "stylelint": "^13.7.0",
-        "stylelint-config-origami-component": "^1.0.4"
-    },
-    "publishConfig": {
-        "registry": "https://origami-npm-registry-prototype.herokuapp.com"
+  "name": "@financial-times/o-assets",
+  "version": "100.0.0-10",
+  "description": "This component provides Sass and JavaScript utilities for reliably building paths to a component's static assets, such as CSS background images, fonts and JSON data files. This is needed because the URL path to load these assets will vary depending on how a product developer chooses to integrate the Origami component into their website.",
+  "keywords": [],
+  "homepage": "https://github.com/Financial-Times/o-assets#readme",
+  "bugs": {
+    "url": "https://github.com/Financial-Times/o-assets/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Financial-Times/o-assets.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "type": "module",
+  "exports": {
+    ".": {
+      "browser": "./main.js"
     }
+  },
+  "browser": "./main.js",
+  "types": "types",
+  "devDependencies": {
+    "eslint": "^7.8.1",
+    "eslint-config-origami-component": "^2.1.0",
+    "origami-ci-tools": "^2.0.2",
+    "remark-preset-lint-origami-component": "^1.2.0",
+    "stylelint": "^13.7.0",
+    "stylelint-config-origami-component": "^1.0.4"
+  },
+  "publishConfig": {
+    "registry": "https://origami-npm-registry-prototype.herokuapp.com"
+  }
 }
