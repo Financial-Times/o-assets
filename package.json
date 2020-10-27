@@ -19,6 +19,6 @@
         "stylelint-config-origami-component": "^1.0.4"
     },
     "publishConfig": {
-        "registry": "http://localhost:4873"
+        "registry": "https://origami-npm-registry-prototype.herokuapp.com"
     }
 }
