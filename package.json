@@ -1,6 +1,6 @@
 {
   "name": "@financial-times/o-assets",
-  "version": "100.0.0-12",
+  "version": "100.0.0-13",
   "description": "This component provides Sass and JavaScript utilities for reliably building paths to a component's static assets, such as CSS background images, fonts and JSON data files. This is needed because the URL path to load these assets will vary depending on how a product developer chooses to integrate the Origami component into their website.",
   "keywords": [],
   "homepage": "https://github.com/Financial-Times/o-assets#readme",
