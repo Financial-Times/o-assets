@@ -1,5 +1,7 @@
 # o-assets [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](#licence)
 
+_Deprecated._ `o-assets` does not support Origami components delivered via npm or version 2 of the Origami specification.
+
 This component provides Sass and JavaScript utilities for reliably building paths to a component's static assets, such as CSS background images, fonts and JSON data files. This is needed because the URL path to load these assets will vary depending on how a product developer chooses to integrate the Origami component into their website.
 
 - [Overview](#overview)
